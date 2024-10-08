@@ -4,7 +4,12 @@ on:
     types: # これがactiity typeになる。
       - opened
   workflow_dispatch:
-
+  push:
+    branches:
+      - main # ここ複数でもいいけど、まあ小さいプロジェクトでは基本mainだよね。
+      # - 'dev-*' # こういう書き方で、 devに加えたwild cardでもいけるらしい。
+    paths-ignore:
+      - '.github/workflows/*' # こうしておけば、このfileの変更があってmain branchにpushされてもそのときはworkflowをうごかさない。
 jobs:
   deploy:
     runs-on: ubuntu-latest
